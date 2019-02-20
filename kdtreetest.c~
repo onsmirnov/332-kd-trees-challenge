@@ -1,0 +1,218 @@
+/*! gcc -std=c89 -pedantic -Wall -g -o test2 test2.c libkdtree.a -lm */
+/* Extended test program, contributed by David Underhill */
+
+/* This version has been extended by Paul Kelly, and also hacked to run with simplescalar
+ */
+
+/* Use "COUNTSHELLS" for performance testing, enable PRINT and COUNT for correctness testing */
+
+/* #define COUNTRESULTS */
+/* #define PRINTRESULTS */
+#define COUNTSHELLS
+
+#include <assert.h>
+#ifdef INTELCOMPILER
+#include "intel-math-fixed.h"
+#else
+#include <math.h>
+#endif
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <time.h>
+#ifdef USEMALLOCNOTALLOCA
+#define alloca malloc
+#endif
+#include "kdtree.h"
+
+#define DEF_NUM_PTS 7000
+
+/* returns the distance squared between two dims-dimensional double arrays */
+static double dist_sq( double *a1, double *a2, int dims );
+
+#ifdef USEOWNSQRT
+/* sqrt2 from https://www.codeproject.com/Articles/69941/%2FArticles%2F69941%2FBest-Square-Root-Method-Algorithm-Function-Precisi
+ * only works on floats
+ */
+#define SQRT_MAGIC_F 0x5f3759df
+float  fsqrt(const float x)
+{
+  const float xhalf = 0.5f*x;
+
+  union /* get bits for floating value */
+  {
+    float x;
+    int i;
+  } u;
+  u.x = x;
+  u.i = SQRT_MAGIC_F - (u.i >> 1);  /* gives initial guess y0 */
+  return x*u.x*(1.5f - xhalf*u.x*u.x);/* Newton step, repeating increases accuracy */
+}   
+#else /* USEOWNSQRT */
+#define fsqrt sqrt
+#endif /* USEOWNSQRT */
+
+
+/* testing: print the results set
+ */
+void printResults(struct kdres *presults) {
+  int *pch;
+  double pos[3], dist;
+  double pt[3] = { 0, 0, 1 };
+  
+  /* print out all the points found in results */
+  printf( "found %d results:\n", kd_res_size(presults) );
+
+  while( !kd_res_end( presults ) ) {
+    /* get the data and position of the current result item */
+    pch = (int*)kd_res_item( presults, pos );
+
+    /* compute the distance of the current result from the pt */
+    dist = fsqrt( (float) dist_sq( pt, pos, 3 ) );
+
+    /* print out the retrieved data */
+    printf( "node at (%.3f, %.3f, %.3f) is %.3f away and has data=%x\n", 
+	    pos[0], pos[1], pos[2], dist, *pch );
+
+    /* go to the next entry */
+    kd_res_next( presults );
+  }
+}
+
+/* testing: count the number of elements in the results set
+ */
+int countResults(struct kdres *presults) {
+  double pos[3];
+  int count = 0;
+  
+  while( !kd_res_end( presults ) ) {
+    /* get the data and position of the current result item */
+    kd_res_item( presults, pos );
+
+    count++;
+
+    /* go to the next entry */
+    kd_res_next( presults );
+  }
+  return count;  
+}
+
+/* performance testing: loop over a series of radii counting set sizes
+ */
+void countShells(void *ptree, double start, double inc, double max) {
+  struct kdres *presults;
+  double radius;
+  double pt[3] = { 0, 0, 1 };
+  int count;
+
+  for (radius=start; radius<=max; radius += inc) {
+    presults = kd_nearest_range( ptree, pt, radius );
+    count = countResults(presults);
+    printf("Radius = %f : count = %d\n", radius, count);
+
+    /* free our results set */
+    kd_res_free( presults );
+  }
+}
+
+
+/* get a random double between -10 and 10 */
+static double rd( void );
+
+int main(int argc, char **argv) {
+  int i, num_pts = DEF_NUM_PTS;
+  void *ptree;
+  int *data;
+  struct kdres *presults;
+  double pt[3] = { 0, 0, 1 };
+  double radius = 10;
+  int count;
+
+  if(argc > 1 && isdigit(argv[1][0])) {
+    num_pts = atoi(argv[1]);
+  }
+
+  if(!(data = malloc(num_pts*sizeof(int)))) {
+    perror("malloc failed");
+    return 1;
+  }
+
+  srand( time(0) );
+
+  /* create a k-d tree for 3-dimensional points */
+  ptree = kd_create( 3 );
+
+  /* add some random nodes to the tree (assert nodes are successfully inserted) */
+  for( i=0; i<num_pts; i++ ) {
+    /*    data[i] = 'a' + i; */
+    data[i] = i;
+    assert( 0 == kd_insert3( ptree, rd(), rd(), rd(), &data[i] ) );
+  }
+
+#ifdef PRINTRESULTS
+  /* find points closest to the origin and within distance radius */
+  presults = kd_nearest_range( ptree, pt, radius );
+
+  printResults(presults);
+
+  /* free our results set */
+  kd_res_free( presults );
+#endif /* PRINTRESULTS */
+
+#ifdef COUNTRESULTS
+  /* find points closest to the origin and within distance radius */
+  presults = kd_nearest_range( ptree, pt, radius );
+
+  count = countResults(presults);
+  printf("count = %d\n", count);
+
+  /* free our results set */
+  kd_res_free( presults );
+#endif /* COUNTRESULTS */
+
+#ifdef COUNTSHELLS
+  countShells(ptree, 0.5, 0.5, 10.0);
+#endif /* COUNTSHELLS */
+
+  /* free our tree and other allocated memory */
+  kd_free( ptree );
+  free( data );
+  return 0;
+}
+
+static double dist_sq( double *a1, double *a2, int dims ) {
+  double dist_sq = 0, diff;
+  while( --dims >= 0 ) {
+    diff = (a1[dims] - a2[dims]);
+    dist_sq += diff*diff;
+  }
+  return dist_sq;
+}
+
+#ifndef USE_LIBRARY_DRAND48
+/* Define our own random number generator since simplescalar's gcc
+ * doesn't come with it */
+
+/* Linear congruential random number generator
+ *   x[n+1] = a * x[n] mod m */
+/* http://remus.rutgers.edu/~rhoads/Code/random.c no recommendation implied! */
+
+static unsigned int SEED = 93186752;
+
+/* return the next random number x: 0 <= x < 1*/
+double drand48 ()
+{
+  static unsigned int a = 1588635695, m = 4294967291U, q = 2, r = 1117695901;
+  SEED = a*(SEED % q) - r*(SEED / q);
+  return ((double)SEED / (double)m);
+}
+
+/* seed the generator */
+void srand48 (unsigned int init) {if (init != 0) SEED = init;}
+#endif
+
+static double rd( void ) {
+  return drand48() * 20.0 - 10.0;
+}
+
+

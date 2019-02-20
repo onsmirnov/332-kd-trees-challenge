@@ -1,0 +1,12 @@
+CC = gcc
+CFLAGS = -std=c89 -pedantic -Wall -g -O3 -DUSEMALLOCNOTALLOCA -DUSEOWNSQRT
+
+.PHONY: all
+all: kdtreetest 
+
+kdtreetest: kdtreetest.c kdtree.c kdtree.h
+	${CC} ${CFLAGS} -o kdtreetest kdtreetest.c kdtree.c
+
+.PHONY: clean
+clean:
+	rm -f kdtreetest 
