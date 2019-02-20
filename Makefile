@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c89 -Wall -g -O3 -DUSEMALLOCNOTALLOCA -DUSEOWNSQRT
+CFLAGS = -std=c89 -Wall -g -O3 -DUSEMALLOCNOTALLOCA -DUSEOWNSQRT -lpthread
 
 .PHONY: all
 all: kdtreetest

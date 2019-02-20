@@ -21,6 +21,7 @@
 #define alloca malloc
 #endif
 #include "kdtree.h"
+#include <pthread.h>
 
 #define DEF_NUM_PTS 830000
 
@@ -44,7 +45,7 @@ float  fsqrt(const float x)
   u.x = x;
   u.i = SQRT_MAGIC_F - (u.i >> 1);  /* gives initial guess y0 */
   return x*u.x*(1.5f - xhalf*u.x*u.x);/* Newton step, repeating increases accuracy */
-}   
+}
 #else /* USEOWNSQRT */
 #define fsqrt sqrt
 #endif /* USEOWNSQRT */
@@ -82,7 +83,7 @@ void printResults(struct kdres *presults) {
   int *pch;
   double pos[3], dist;
   double pt[3] = { 0, 0, 1 };
-  
+
   /* print out all the points found in results */
   printf( "found %d results:\n", kd_res_size(presults) );
 
@@ -94,7 +95,7 @@ void printResults(struct kdres *presults) {
     dist = fsqrt( (float) dist_sq( pt, pos, 3 ) );
 
     /* print out the retrieved data */
-    printf( "node at (%.3f, %.3f, %.3f) is %.3f away and has data=%x\n", 
+    printf( "node at (%.3f, %.3f, %.3f) is %.3f away and has data=%x\n",
 	    pos[0], pos[1], pos[2], dist, *pch );
 
     /* go to the next entry */
@@ -107,7 +108,7 @@ void printResults(struct kdres *presults) {
 int countResults(struct kdres *presults) {
   double pos[3];
   int count = 0;
-  
+
   while( !kd_res_end( presults ) ) {
     /* get the data and position of the current result item */
     kd_res_item( presults, pos );
@@ -117,7 +118,7 @@ int countResults(struct kdres *presults) {
     /* go to the next entry */
     kd_res_next( presults );
   }
-  return count;  
+  return count;
 }
 
 /* performance testing: loop over a series of radii counting set sizes
@@ -138,6 +139,16 @@ void countShells(void *ptree, double start, double inc, double max) {
   }
 }
 
+struct insert_params {
+	struct kdtree *ptree;
+  int *data;
+};
+
+void *insert_proc(void *parameters) {
+  struct insert_params *params = parameters;
+  assert (0 == kd_insert3( params->ptree, rd(), rd(), rd(), params->data));
+  return NULL;
+}
 
 /* get a random double between -10 and 10 */
 static double rd( void );
@@ -167,11 +178,32 @@ int main(int argc, char **argv) {
   /* create a k-d tree for 3-dimensional points */
   ptree = kd_create( 3 );
 
+  /* One thread for each core (4) */
+  pthread_t threads[4];
+
   /* add some random nodes to the tree (assert nodes are successfully inserted) */
   for( i=0; i<num_pts; i++ ) {
     /*    data[i] = 'a' + i; */
     data[i] = i;
-    assert( 0 == kd_insert3( ptree, rd(), rd(), rd(), &data[i] ) );
+
+    struct insert_params *params;
+    if(!(params = malloc(sizeof(struct insert_params)))) {
+      perror("malloc failed");
+      free( data );
+      return 1;
+    }
+    params->ptree = ptree;
+    params->data = &data[i];
+
+    if(pthread_create(&threads[i%4], NULL, insert_proc, &params)) {
+      perror("Error creating thread");
+      return 1;
+    }
+
+    if(pthread_join(threads[i%4], NULL)) {
+      perror("Error joining thread");
+      return 1;
+    }
   }
 
 #ifdef PRINTRESULTS
@@ -212,7 +244,7 @@ int main(int argc, char **argv) {
   /* free our results set */
   kd_res_free( presults );
 #endif
-  
+
   /* free our tree and other allocated memory */
   kd_free( ptree );
   free( data );
@@ -227,6 +259,3 @@ static double dist_sq( double *a1, double *a2, int dims ) {
   }
   return dist_sq;
 }
-
-
-

@@ -1,0 +1,7 @@
+Running the program with a large number of points (10,000,000) results in the tree being too large to fit in the TLB or caches of our i7-6700 CPU.
+The tree size is -
+The L3 cache size is -
+As such, we suffer significant miss penalties fairly frequently, when we have one of these misses.
+What is worse, is that the k-d tree is an irregular structure, and as such, hardware prefetchers (TODO: does the 6700 have hardware prefetchers?) will struggle
+to predict memory accesses for our tree, such as when we recurse down the branches of a node. A possible solution to this is to use software prefetches.
+This leads us to the hypothesis of: we can increase performance by reducing memory latency with software prefetches to reduce miss rates.
