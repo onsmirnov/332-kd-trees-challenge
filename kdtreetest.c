@@ -194,7 +194,6 @@ int main(int argc, char **argv) {
     }
     params->ptree = ptree;
     params->data = &data[i];
-
     if(pthread_create(&threads[i%4], NULL, insert_proc, &params)) {
       perror("Error creating thread");
       return 1;
