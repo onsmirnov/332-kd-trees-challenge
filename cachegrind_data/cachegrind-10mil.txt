@@ -1,0 +1,616 @@
+--------------------------------------------------------------------------------
+I1 cache:         32768 B, 64 B, 8-way associative
+D1 cache:         32768 B, 64 B, 8-way associative
+LL cache:         8388608 B, 64 B, 16-way associative
+Command:          ./kdtreetest 10000000
+Data file:        cachegrind.out.28689
+Events recorded:  Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw Bc Bcm Bi Bim
+Events shown:     Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw Bc Bcm Bi Bim
+Event sort order: Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw Bc Bcm Bi Bim
+Thresholds:       0.1 100 100 100 100 100 100 100 100 100 100 100 100
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+            Ir  I1mr  ILmr             Dr          D1mr          DLmr            Dw       D1mw       DLmw            Bc         Bcm          Bi Bim 
+--------------------------------------------------------------------------------
+34,777,864,967 1,730 1,696 10,335,384,341 1,548,080,946 1,242,738,878 3,011,009,445 56,961,596 18,085,481 5,150,635,917 147,878,911 142,699,011 194  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+            Ir I1mr ILmr            Dr          D1mr        DLmr          Dw       D1mw       DLmw            Bc         Bcm          Bi Bim  file:function
+--------------------------------------------------------------------------------
+13,708,090,992    6    6 4,888,319,958 1,237,968,657 993,667,546 160,000,073  1,424,506         26 1,995,327,969 123,187,688           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtree.c:kd_insert
+ 6,367,277,249   64   61 1,894,744,061   157,046,604 128,720,483 958,074,576 26,115,408  2,316,169   772,271,856  12,886,753           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtree.c:find_nearest.constprop.2
+ 4,974,150,748   31   31   828,952,865    21,872,291  10,752,670 775,319,601 23,606,083 15,131,026   637,685,925   3,355,670           0   0  /build/glibc-OTsEL5/glibc-2.27/malloc/malloc.c:_int_malloc
+ 4,524,885,164   51   48 1,300,254,344    16,170,609  15,802,321 520,102,078     48,526        122   988,193,090         241           0   0  /build/glibc-OTsEL5/glibc-2.27/malloc/malloc.c:free
+ 2,417,717,740    8    8   572,112,293    11,798,655         850 156,030,626  2,988,851      9,372   501,671,425   3,354,675           1   1  /build/glibc-OTsEL5/glibc-2.27/malloc/malloc.c:malloc
+   530,000,078   12   12    40,000,021     2,963,776          42  60,000,017  2,200,205    625,000    20,000,007          15           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtreetest.c:main
+   430,150,890    1    1   229,413,808     9,163,756   9,071,377  28,676,726          0          0    57,353,452           1           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtree.c:kd_res_item
+   386,768,668    4    4   116,030,474    28,676,646  28,487,728  77,353,635         40         26    77,353,933          92           0   0  /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms
+   286,767,673    5    5            90             2           2  86,030,269          0          0    28,676,768          46           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtreetest.c:countShells
+   200,737,082    0    0    86,030,178     5,253,065   5,227,938  28,676,726          0          0             0           0           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtree.c:kd_res_next
+   189,961,699    3    3    49,999,941    17,679,046  14,931,472  39,999,940    573,937        158    29,999,971   5,086,400           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtree.c:clear_rec
+   160,051,162   40   38    32,010,266     7,613,772   7,583,675  32,010,224          0          0    32,010,182          24           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtree.c:kd_res_free
+   150,000,000    2    2    40,000,000     1,632,515          17  40,000,000          0          0    10,000,000           0           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtree.c:kd_insert3
+   143,383,630    1    1    57,353,452    28,676,673  28,482,643  28,676,726          0          0             0           0           0   0  /usr/include/x86_64-linux-gnu/bits/string_fortified.h:kd_res_item
+   142,697,533   34   29   142,697,447     1,553,304         193          21          1          1            10           7 142,697,417  24  ???:???
+   114,706,984    1    1    57,353,492             0           0           0          0          0             0           0           0   0  /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtree.c:kd_res_end
+    50,000,008    1    1             0             0           0  20,000,002          0          0             0           0           0   0  /usr/include/x86_64-linux-gnu/bits/string_fortified.h:kd_insert
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtree.c
+--------------------------------------------------------------------------------
+           Ir I1mr ILmr            Dr        D1mr        DLmr          Dw      D1mw      DLmw          Bc         Bcm Bi Bim 
+
+-- line 109 ----------------------------------------
+            .    .    .             .           .           .           .         .         .           .           .  .   .  #else
+            .    .    .             .           .           .           .         .         .           .           .  .   .  #define alloc_resnode()		malloc(sizeof(struct res_node))
+            .    .    .             .           .           .           .         .         .           .           .  .   .  #define free_resnode(n)		free(n)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  #endif
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  struct kdtree *kd_create(int k)
+            2    1    1             0           0           0           1         0         0           0           0  0   0  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	struct kdtree *tree;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            4    0    0             0           0           0           1         0         0           1           0  0   0  	if(!(tree = malloc(sizeof *tree))) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            1    0    0             0           0           0           1         0         0           0           0  0   0  	tree->dim = k;
+            1    0    0             0           0           0           1         0         0           0           0  0   0  	tree->root = 0;
+            1    1    1             0           0           0           1         0         0           0           0  0   0  	tree->destr = 0;
+            1    0    0             0           0           0           1         0         0           0           0  0   0  	tree->rect = 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return tree;
+            2    0    0             2           0           0           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  void kd_free(struct kdtree *tree)
+            8    0    0             0           0           0           6         0         0           0           0  0   0  {
+            2    0    0             0           0           0           0         0         0           1           0  0   0  	if(tree) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		kd_clear(tree);
+            2    0    0             0           0           0           0         0         0           0           0  0   0  		free(tree);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            7    0    0             6           1           1           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static void clear_rec(struct kdnode *node, void (*destr)(void*))
+   19,999,908    0    0             0           0           0  14,999,931   573,937       158           0           0  0   0  {
+   45,000,057    3    3     5,000,055           0           0           0         0         0  20,000,001     162,335  0   0  	if(!node) return;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+   24,961,945   11   11    10,000,000   9,999,851   9,959,371   5,000,016         0         0           0           0  0   0  	clear_rec(node->left, destr);
+   20,000,032    1    1    10,000,000   2,534,298   2,485,396   5,000,016         0         0           0           0  0   0  	clear_rec(node->right, destr);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	
+   20,000,000    0    0             0           0           0           0         0         0  10,000,000   4,924,089  0   0  	if(destr) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		destr(node->data);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+   20,000,000    2    2    10,000,000   4,670,538   2,486,652  10,000,000         0         0           0           0  0   0  	free(node->pos);
+   25,000,023    1    1             0           0           0   5,000,023         0         0           0           0  0   0  	free(node);
+   14,999,931    0    0    14,999,931     474,404          88           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  void kd_clear(struct kdtree *tree)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            2    0    0             2           1           1           0         0         0           0           0  0   0  	clear_rec(tree->root, tree->destr);
+            1    0    0             0           0           0           1         0         0           0           0  0   0  	tree->root = 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            3    0    0             1           1           1           0         0         0           1           0  0   0  	if (tree->rect) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		hyperrect_free(tree->rect);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		tree->rect = 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  void kd_data_destructor(struct kdtree *tree, void (*destr)(void*))
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	tree->destr = destr;
+-- line 167 ----------------------------------------
+-- line 168 ----------------------------------------
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static int insert_rec(struct kdnode **nptr, const double *pos, void *data, int dir, int dim)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	int new_dir;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	struct kdnode *node;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+2,812,991,964    0    0   937,663,988      17,961      17,731           0         0         0 937,663,988  10,038,055  0   0  	if(!*nptr) {
+   50,000,000    1    1             0           0           0  20,000,000 1,424,506        26  10,000,000           0  0   0  		if(!(node = malloc(sizeof *node))) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  			return -1;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		}
+   80,000,000    1    1    10,000,000           0           0  20,000,000         0         0  10,000,000           0  0   0  		if(!(node->pos = malloc(dim * sizeof *node->pos))) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  			free(node);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  			return -1;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		memcpy(node->pos, pos, dim * sizeof *node->pos);
+   30,000,000    0    0    20,000,000           0           0  10,000,000         0         0           0           0  0   0  		node->data = data;
+   10,000,000    0    0             0           0           0  10,000,000         0         0           0           0  0   0  		node->dir = dir;
+   20,000,000    1    1             0           0           0  20,000,000         0         0           0           0  0   0  		node->left = node->right = 0;
+   10,000,000    0    0             0           0           0  10,000,000         0         0           0           0  0   0  		*nptr = node;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	node = *nptr;
+4,638,319,940    0    0   927,663,988 511,057,087 377,274,528           0         0         0           0           0  0   0  	new_dir = (node->dir + 1) % dim;
+3,710,655,952    0    0 2,782,991,964 720,477,356 616,375,199           0         0         0 927,663,988 113,149,502  0   0  	if(pos[node->dir] < node->pos[node->dir]) {
+  927,663,988    0    0             0           0           0           0         0         0           0           0  0   0  		return insert_rec(&(*nptr)->left, pos, data, new_dir, dim);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+  808,459,068    0    0             0           0           0           0         0         0           0           0  0   0  	return insert_rec(&(*nptr)->right, pos, data, new_dir, dim);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  int kd_insert(struct kdtree *tree, const double *pos, void *data)
+  100,000,000    1    1             0           0           0  70,000,000         0         0           0           0  0   0  {
+   30,000,000    0    0    10,000,000           0           0           0         0         0           0           0  0   0  	if (insert_rec(&tree->root, pos, data, 0, tree->dim)) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return -1;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+   30,000,000    0    0    10,000,000   1,489,132          20           0         0         0  10,000,000           1  0   0  	if (tree->rect == 0) {
+   10,000,002    0    0             0           0           0           1         0         0           0           0  0   0  		tree->rect = hyperrect_create(tree->dim, pos, pos);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	} else {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		hyperrect_extend(tree->rect, pos);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return 0;
+   80,000,000    0    0    70,000,000   1,534,448          22           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  int kd_insertf(struct kdtree *tree, const float *pos, void *data)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	static double sbuf[16];
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	double *bptr, *buf = 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	int res, dim = tree->dim;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	if(dim > 16) {
+-- line 221 ----------------------------------------
+-- line 241 ----------------------------------------
+            .    .    .             .           .           .           .         .         .           .           .  .   .  #else
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	if(tree->dim > 16)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  #endif
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		free(buf);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return res;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  int kd_insert3(struct kdtree *tree, double x, double y, double z, void *data)
+   50,000,000    0    0    10,000,000           0           0  10,000,000         0         0           0           0  0   0  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	double buf[3];
+   20,000,000    1    1             0           0           0  10,000,000         0         0           0           0  0   0  	buf[0] = x;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	buf[1] = y;
+   10,000,000    0    0             0           0           0  10,000,000         0         0           0           0  0   0  	buf[2] = z;
+   20,000,000    0    0             0           0           0  10,000,000         0         0           0           0  0   0  	return kd_insert(tree, buf, data);
+   50,000,000    1    1    30,000,000   1,632,515          17           0         0         0  10,000,000           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  int kd_insert3f(struct kdtree *tree, float x, float y, float z, void *data)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	double buf[3];
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	buf[0] = x;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	buf[1] = y;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	buf[2] = z;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return kd_insert(tree, buf, data);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+  453,455,548    1    1             0           0           0 388,676,184 4,409,315    19,283           0           0  0   0  static int find_nearest(struct kdnode *node, const double *pos, double range, struct res_node *list, int ordered, int dim)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	double dist_sq, dx;
+   65,454,462    2    2             0           0           0  16,249,631         0         0           0           0  0   0  	int i, ret, added_res = 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+  367,503,819    0    0    31,085,050       2,607          21           0         0         0 128,048,440   1,042,059  0   0  	if(!node) return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+  194,212,239    3    3             0           0           0          21         0         0           0           0  0   0  	dist_sq = 0;
+  582,636,507    3    3             0           0           0           0         0         0 258,949,568       1,195  0   0  	for(i=0; i<dim; i++) {
+1,165,273,035    1    1   453,161,744 129,507,657 128,715,086           0         0         0           0           0  0   0  		dist_sq += SQ(node->pos[i] - pos[i]);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+  502,487,406    8    7    38,246,133           0           0  96,330,817 9,274,179    44,865  64,737,392     226,448  0   0  	if(dist_sq <= SQ(range)) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		if(rlist_insert(list, node, ordered ? dist_sq : -1.0) == -1) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  			return -1;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		}
+   32,010,161    0    0             0           0           0  15,425,978         0         0           0           0  0   0  		added_res = 1;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+  322,218,623    8    8   258,949,568           0           0  63,269,055 4,434,057    14,056           0           0  0   0  	dx = pos[node->dir] - node->pos[node->dir];
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+  226,478,579    4    4    66,205,750       1,422       1,421  10,278,254    38,652        12  64,737,392  11,217,376  0   0  	ret = find_nearest(dx <= 0.0 ? node->left : node->right, pos, range, list, ordered, dim);
+  499,918,702   29   27   243,671,477     622,406         376       3,796         0         0  97,167,040     249,019  0   0  	if(ret >= 0 && fabs(dx) < range) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		added_res += ret;
+  700,203,792    6    6   166,265,666  14,346,424       1,887 164,742,618 3,898,329     3,011  63,311,027     146,447  0   0  		ret = find_nearest(dx <= 0.0 ? node->right : node->left, pos, range, list, ordered, dim);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+  220,874,360    1    1    61,902,590           1           1           0         0         0  63,311,027       4,220  0   0  	if(ret == -1) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return -1;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	added_res += ret;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return added_res;
+  583,014,276    1    1   453,455,548  12,528,703       1,698           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  #if 0
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static int find_nearest_n(struct kdnode *node, const double *pos, double range, int num, struct rheap *heap, int dim)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	double dist_sq, dx;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	int i, ret, added_res = 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	if(!node) return 0;
+-- line 305 ----------------------------------------
+-- line 534 ----------------------------------------
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	rset->size = ret;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	kd_res_rewind(rset);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return rset;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }*/
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  struct kdres *kd_nearest_range(struct kdtree *kd, const double *pos, double range)
+          210    1    1             0           0           0         147         0         0           0           0  0   0  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	int ret;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	struct kdres *rset;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+          105    0    0             0           0           0          21         0         0          21           0  0   0  	if(!(rset = malloc(sizeof *rset))) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+          126    1    1             0           0           0          42         0         0          21           0  0   0  	if(!(rset->rlist = alloc_resnode())) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		free(rset);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+           21    0    0             0           0           0          21         9         6           0           0  0   0  	rset->rlist->next = 0;
+           21    0    0             0           0           0          21         0         0           0           0  0   0  	rset->tree = kd;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+           44    0    0            42          19          16           0         0         0           1           0  0   0  	if((ret = find_nearest(kd->root, pos, range, rset->rlist, 0, kd->dim)) == -1) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		kd_res_free(rset);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+           21    0    0             0           0           0          21        20        18           0           0  0   0  	rset->size = ret;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	kd_res_rewind(rset);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return rset;
+          189    0    0           147          22          19           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  struct kdres *kd_nearest_rangef(struct kdtree *kd, const float *pos, float range)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	static double sbuf[16];
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	double *bptr, *buf = 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	int dim = kd->dim;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	struct kdres *res;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+-- line 571 ----------------------------------------
+-- line 610 ----------------------------------------
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	double buf[3];
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	buf[0] = x;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	buf[1] = y;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	buf[2] = z;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return kd_nearest_range(tree, buf, range);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  void kd_res_free(struct kdres *rset)
+           84   21   20             0           0           0          42         0         0           0           0  0   0  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	clear_results(rset);
+           42    0    0             0           0           0          21         0         0           0           0  0   0  	free_resnode(rset->rlist);
+           42    0    0             0           0           0           0         0         0           0           0  0   0  	free(rset);
+           63    0    0            42          19          16           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  int kd_res_size(struct kdres *set)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            1    0    0             1           0           0           0         0         0           0           0  0   0  	return (set->size);
+            1    0    0             1           0           0           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  void kd_res_rewind(struct kdres *rset)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+           21    0    0             0           0           0          21         0         0           0           0  0   0  	rset->riter = rset->rlist->next;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  int kd_res_end(struct kdres *rset)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+   86,030,238    1    1    28,676,746           0           0           0         0         0           0           0  0   0  	return rset->riter == 0;
+   28,676,746    0    0    28,676,746           0           0           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  int kd_res_next(struct kdres *rset)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+   86,030,178    0    0    57,353,452   5,253,065   5,227,938  28,676,726         0         0           0           0  0   0  	rset->riter = rset->riter->next;
+   86,030,178    0    0             0           0           0           0         0         0           0           0  0   0  	return rset->riter != 0;
+   28,676,726    0    0    28,676,726           0           0           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  void *kd_res_item(struct kdres *rset, double *pos)
+   28,676,726    0    0             0           0           0  28,676,726         0         0           0           0  0   0  {
+   86,030,178    1    1    28,676,726           0           0           0         0         0  28,676,726           1  0   0  	if(rset->riter) {
+   86,030,178    0    0    28,676,726   9,163,171   9,070,795           0         0         0  28,676,726           0  0   0  		if(pos) {
+  114,706,904    0    0    57,353,452          20          17           0         0         0           0           0  0   0  			memcpy(pos, rset->riter->item->pos, rset->tree->dim * sizeof *pos);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		}
+   28,676,726    0    0    28,676,726         565         565           0         0         0           0           0  0   0  		return rset->riter->item->data;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return 0;
+   86,030,178    0    0    86,030,178           0           0           0         0         0           0           0  0   0  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  void *kd_res_itemf(struct kdres *rset, float *pos)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	if(rset->riter) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		if(pos) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  			int i;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  			for(i=0; i<rset->tree->dim; i++) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  				pos[i] = rset->riter->item->pos[i];
+-- line 662 ----------------------------------------
+-- line 695 ----------------------------------------
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  /* ---- hyperrectangle helpers ---- */
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static struct kdhyperrect* hyperrect_create(int dim, const double *min, const double *max)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	size_t size = dim * sizeof(double);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	struct kdhyperrect* rect = 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            5    2    2             0           0           0           1         0         0           1           0  0   0  	if (!(rect = malloc(sizeof(struct kdhyperrect)))) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            1    0    0             0           0           0           1         0         0           0           0  0   0  	rect->dim = dim;
+            6    0    0             0           0           0           2         0         0           1           0  0   0  	if (!(rect->min = malloc(size))) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		free(rect);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            6    0    0             0           0           0           2         0         0           1           0  0   0  	if (!(rect->max = malloc(size))) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		free(rect->min);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		free(rect);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	memcpy(rect->min, min, size);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	memcpy(rect->max, max, size);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return rect;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static void hyperrect_free(struct kdhyperrect *rect)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            2    0    0             1           0           0           1         0         0           0           0  0   0  	free(rect->min);
+            2    0    0             1           0           0           1         0         0           0           0  0   0  	free(rect->max);
+            2    0    0             0           0           0           1         0         0           0           0  0   0  	free(rect);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static struct kdhyperrect* hyperrect_duplicate(const struct kdhyperrect *rect)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return hyperrect_create(rect->dim, rect->min, rect->max);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static void hyperrect_extend(struct kdhyperrect *rect, const double *pos)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	int i;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+   89,999,991    0    0     9,999,999   1,873,938          16           0         0         0  39,999,996          17  0   0  	for (i=0; i < rect->dim; i++) {
+  129,999,987    0    0    69,999,993   1,518,735          30           0         0         0  29,999,997          49  0   0  		if (pos[i] < rect->min[i]) {
+           60    0    0            30           0           0          30         0         0           0           0  0   0  			rect->min[i] = pos[i];
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		}
+  109,999,989    0    0    39,999,996           0           0           0         0         0  29,999,997          64  0   0  		if (pos[i] > rect->max[i]) {
+   30,000,033    0    0             0           0           0          36         0         0           0           0  0   0  			rect->max[i] = pos[i];
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static double hyperrect_dist_sq(struct kdhyperrect *rect, const double *pos)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	int i;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	double result = 0;
+-- line 752 ----------------------------------------
+-- line 812 ----------------------------------------
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  /* inserts the item. if dist_sq is >= 0, then do an ordered insert */
+            .    .    .             .           .           .           .         .         .           .           .  .   .  /* TODO make the ordering code use heapsort */
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static int rlist_insert(struct res_node *list, struct kdnode *item, double dist_sq)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	struct res_node *rnode;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+  187,672,308    3    3    16,584,183           0           0  75,057,642 1,685,218     9,993  32,010,161           2  0   0  	if(!(rnode = alloc_resnode())) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		return -1;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+   38,820,538    0    0     6,810,377           0           0  32,010,161         0         0           0           0  0   0  	rnode->item = item;
+   81,175,195    0    0    49,165,034          21          17  32,010,161         0         0           0           0  0   0  	rnode->dist_sq = dist_sq;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	if(dist_sq >= 0.0) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		while(list->next && list->next->dist_sq < dist_sq) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  			list = list->next;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+   64,020,322    0    0    32,010,161      37,485          70  32,010,161 2,375,658 2,224,949           0           0  0   0  	rnode->next = list->next;
+   79,848,776    0    0    17,231,202           0           0  32,010,161         0         0           0           0  0   0  	list->next = rnode;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	return 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  static void clear_results(struct kdres *rset)
+            .    .    .             .           .           .           .         .         .           .           .  .   .  {
+           42   19   18            42           0           0           0         0         0           0           0  0   0  	struct res_node *tmp, *node = rset->rlist->next;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+   96,030,567    0    0            21          20          17           0         0         0  32,010,182          24  0   0  	while(node) {
+            .    .    .             .           .           .           .         .         .           .           .  .   .  		tmp = node;
+   32,010,161    0    0    32,010,161   7,613,733   7,583,642           0         0         0           0           0  0   0  		node = node->next;
+   32,010,161    0    0             0           0           0  32,010,161         0         0           0           0  0   0  		free_resnode(tmp);
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	}
+            .    .    .             .           .           .           .         .         .           .           .  .   .  
+            .    .    .             .           .           .           .         .         .           .           .  .   .  	rset->rlist->next = 0;
+            .    .    .             .           .           .           .         .         .           .           .  .   .  }
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/x86_64-linux-gnu/bits/string_fortified.h
+--------------------------------------------------------------------------------
+         Ir I1mr ILmr         Dr       D1mr       DLmr         Dw D1mw DLmw Bc Bcm Bi Bim 
+
+-- line 26 ----------------------------------------
+          .    .    .          .          .          .          .    .    .  .   .  .   .  __warndecl (__warn_memset_zero_len,
+          .    .    .          .          .          .          .    .    .  .   .  .   .  	    "memset used with constant zero length parameter; this could be due to transposed parameters");
+          .    .    .          .          .          .          .    .    .  .   .  .   .  #endif
+          .    .    .          .          .          .          .    .    .  .   .  .   .  
+          .    .    .          .          .          .          .    .    .  .   .  .   .  __fortify_function void *
+          .    .    .          .          .          .          .    .    .  .   .  .   .  __NTH (memcpy (void *__restrict __dest, const void *__restrict __src,
+          .    .    .          .          .          .          .    .    .  .   .  .   .  	       size_t __len))
+          .    .    .          .          .          .          .    .    .  .   .  .   .  {
+193,383,638    2    2 57,353,452 28,676,673 28,482,643 48,676,728    0    0  0   0  0   0    return __builtin___memcpy_chk (__dest, __src, __len, __bos0 (__dest));
+          .    .    .          .          .          .          .    .    .  .   .  .   .  }
+          .    .    .          .          .          .          .    .    .  .   .  .   .  
+          .    .    .          .          .          .          .    .    .  .   .  .   .  __fortify_function void *
+          .    .    .          .          .          .          .    .    .  .   .  .   .  __NTH (memmove (void *__dest, const void *__src, size_t __len))
+          .    .    .          .          .          .          .    .    .  .   .  .   .  {
+          .    .    .          .          .          .          .    .    .  .   .  .   .    return __builtin___memmove_chk (__dest, __src, __len, __bos0 (__dest));
+          .    .    .          .          .          .          .    .    .  .   .  .   .  }
+          .    .    .          .          .          .          .    .    .  .   .  .   .  
+-- line 42 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /homes/ns4516/GitProjects/332-kd-trees-challenge/kdtreetest.c
+--------------------------------------------------------------------------------
+         Ir I1mr ILmr         Dr      D1mr DLmr         Dw      D1mw    DLmw         Bc Bcm Bi Bim 
+
+-- line 58 ----------------------------------------
+          .    .    .          .         .    .          .         .       .          .   .  .   .  /* http://remus.rutgers.edu/~rhoads/Code/random.c no recommendation implied! */
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  static unsigned int SEED = 93186752;
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  /* return the next random number x: 0 <= x < 1*/
+          .    .    .          .         .    .          .         .       .          .   .  .   .  double drand48 ()
+          .    .    .          .         .    .          .         .       .          .   .  .   .  {
+          .    .    .          .         .    .          .         .       .          .   .  .   .    static unsigned int a = 1588635695, m = 4294967291U, q = 2, r = 1117695901;
+220,000,000    0    0 10,000,000 1,476,130   22 10,000,000         0       0          0   0  0   0    SEED = a*(SEED % q) - r*(SEED / q);
+100,000,000    2    2          0         0    0 10,000,000         1       0          0   0  0   0    return ((double)SEED / (double)m);
+          .    .    .          .         .    .          .         .       .          .   .  .   .  }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  /* seed the generator */
+          .    .    .          .         .    .          .         .       .          .   .  .   .  void srand48 (unsigned int init) {if (init != 0) SEED = init;}
+          .    .    .          .         .    .          .         .       .          .   .  .   .  #endif
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  static double rd( void ) {
+ 50,000,000    0    0          0         0    0 10,000,000         0       0          0   0  0   0    return drand48() * 20.0 - 10.0;
+          .    .    .          .         .    .          .         .       .          .   .  .   .  }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  /* testing: print the results set
+          .    .    .          .         .    .          .         .       .          .   .  .   .   */
+          .    .    .          .         .    .          .         .       .          .   .  .   .  void printResults(struct kdres *presults) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .    int *pch;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    double pos[3], dist;
+-- line 83 ----------------------------------------
+-- line 101 ----------------------------------------
+          .    .    .          .         .    .          .         .       .          .   .  .   .      kd_res_next( presults );
+          .    .    .          .         .    .          .         .       .          .   .  .   .    }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  /* testing: count the number of elements in the results set
+          .    .    .          .         .    .          .         .       .          .   .  .   .   */
+          .    .    .          .         .    .          .         .       .          .   .  .   .  int countResults(struct kdres *presults) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .    double pos[3];
+         20    0    0          0         0    0          0         0       0          0   0  0   0    int count = 0;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    
+114,706,984    1    1          0         0    0 28,676,746         0       0 28,676,746  43  0   0    while( !kd_res_end( presults ) ) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .      /* get the data and position of the current result item */
+ 86,030,178    0    0          0         0    0 28,676,726         0       0          0   0  0   0      kd_res_item( presults, pos );
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+ 28,676,726    0    0          0         0    0          0         0       0          0   0  0   0      count++;
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .      /* go to the next entry */
+ 57,353,452    0    0          0         0    0 28,676,726         0       0          0   0  0   0      kd_res_next( presults );
+          .    .    .          .         .    .          .         .       .          .   .  .   .    }
+          .    .    .          .         .    .          .         .       .          .   .  .   .    return count;  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  /* performance testing: loop over a series of radii counting set sizes
+          .    .    .          .         .    .          .         .       .          .   .  .   .   */
+         13    2    2          1         0    0          9         0       0          0   0  0   0  void countShells(void *ptree, double start, double inc, double max) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .    struct kdres *presults;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    double radius;
+          4    0    0          1         0    0          2         0       0          0   0  0   0    double pt[3] = { 0, 0, 1 };
+          .    .    .          .         .    .          .         .       .          .   .  .   .    int count;
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+        126    0    0         60         0    0         20         0       0         21   3  0   0    for (radius=start; radius<=max; radius += inc) {
+        120    0    0         20         0    0         20         0       0          0   0  0   0      presults = kd_nearest_range( ptree, pt, radius );
+          .    .    .          .         .    .          .         .       .          .   .  .   .      count = countResults(presults);
+          .    .    .          .         .    .          .         .       .          .   .  .   .      printf("Radius = %f : count = %d\n", radius, count);
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .      /* free our results set */
+         40    1    1          0         0    0         20         0       0          0   0  0   0      kd_res_free( presults );
+          .    .    .          .         .    .          .         .       .          .   .  .   .    }
+         10    1    1          8         2    2          0         0       0          1   0  0   0  }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  /* get a random double between -10 and 10 */
+          .    .    .          .         .    .          .         .       .          .   .  .   .  static double rd( void );
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          9    1    1          1         0    0          6         0       0          0   0  0   0  int main(int argc, char **argv) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .    int i, num_pts = DEF_NUM_PTS;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    void *ptree;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    int *data;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    struct kdres *presults;
+          4    1    1          1         1    1          2         0       0          0   0  0   0    double pt[3] = { 0, 0, 1 };
+          .    .    .          .         .    .          .         .       .          .   .  .   .    double radius = 10;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    int count;
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          9    0    0          4         2    1          1         0       0          2   1  0   0    if(argc > 1 && isdigit(argv[1][0])) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .      num_pts = atoi(argv[1]);
+          .    .    .          .         .    .          .         .       .          .   .  .   .    }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          6    0    0          0         0    0          1         0       0          1   0  0   0    if(!(data = malloc(num_pts*sizeof(int)))) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .      perror("malloc failed");
+          .    .    .          .         .    .          .         .       .          .   .  .   .      return 1;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  #ifdef RESEEDNONDETERMINISTICALLY
+          .    .    .          .         .    .          .         .       .          .   .  .   .    srand( time(0) );
+          .    .    .          .         .    .          .         .       .          .   .  .   .  #endif
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .    /* create a k-d tree for 3-dimensional points */
+          9    1    1          3         1    0          1         0       0          0   0  0   0    ptree = kd_create( 3 );
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .    /* add some random nodes to the tree (assert nodes are successfully inserted) */
+ 40,000,002    2    2          0         0    0          0         0       0 10,000,001  12  0   0    for( i=0; i<num_pts; i++ ) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .      /*    data[i] = 'a' + i; */
+ 10,000,000    1    1          0         0    0 10,000,000 2,200,204 625,000          0   0  0   0      data[i] = i;
+110,000,000    0    0 30,000,000 1,487,638   14 20,000,000         0       0 10,000,000   0  0   0      assert( 0 == kd_insert3( ptree, rd(), rd(), rd(), &data[i] ) );
+          .    .    .          .         .    .          .         .       .          .   .  .   .    }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  #ifdef PRINTRESULTS
+          .    .    .          .         .    .          .         .       .          .   .  .   .    /* find points closest to the origin and within distance radius */
+          .    .    .          .         .    .          .         .       .          .   .  .   .    presults = kd_nearest_range( ptree, pt, radius );
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .    printResults(presults);
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+-- line 182 ----------------------------------------
+-- line 191 ----------------------------------------
+          .    .    .          .         .    .          .         .       .          .   .  .   .    count = countResults(presults);
+          .    .    .          .         .    .          .         .       .          .   .  .   .    printf("count = %d\n", count);
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .    /* free our results set */
+          .    .    .          .         .    .          .         .       .          .   .  .   .    kd_res_free( presults );
+          .    .    .          .         .    .          .         .       .          .   .  .   .  #endif /* COUNTRESULTS */
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  #ifdef COUNTSHELLS
+          5    0    0          1         1    1          1         0       0          0   0  0   0    countShells(ptree, 0.5, 0.5, 10.0);
+          .    .    .          .         .    .          .         .       .          .   .  .   .  #endif /* COUNTSHELLS */
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  #ifdef CHECKCORRECTNESS
+          .    .    .          .         .    .          .         .       .          .   .  .   .    double testradius = 8.62042; /* chosen to make the fraction of the points about 1/3 */
+          5    1    1          1         1    1          1         0       0          0   0  0   0    presults = kd_nearest_range( ptree, pt, testradius );
+          2    1    1          0         0    0          1         0       0          0   0  0   0    int nresults = kd_res_size(presults);
+          5    0    0          0         0    0          0         0       0          0   0  0   0    double fraction = (double)nresults/(double)num_pts;
+          5    0    0          2         0    0          0         0       0          2   1  0   0    if (fraction > 0.31 && fraction < 0.34) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .      printf("Results look correct, fraction within %f = %f\n", testradius, fraction);
+          .    .    .          .         .    .          .         .       .          .   .  .   .    } else {
+          .    .    .          .         .    .          .         .       .          .   .  .   .      printf("Results look WRONG - check!  fraction within %f = %f\n", testradius, fraction);
+          .    .    .          .         .    .          .         .       .          .   .  .   .    }
+          .    .    .          .         .    .          .         .       .          .   .  .   .    /* free our results set */
+          2    1    1          0         0    0          1         0       0          0   0  0   0    kd_res_free( presults );
+          .    .    .          .         .    .          .         .       .          .   .  .   .  #endif
+          .    .    .          .         .    .          .         .       .          .   .  .   .    
+          .    .    .          .         .    .          .         .       .          .   .  .   .    /* free our tree and other allocated memory */
+          2    0    0          0         0    0          1         0       0          0   0  0   0    kd_free( ptree );
+          2    0    0          0         0    0          1         0       0          0   0  0   0    free( data );
+          1    0    0          0         0    0          0         0       0          0   0  0   0    return 0;
+         10    1    1          8         2    2          0         0       0          1   1  0   0  }
+          .    .    .          .         .    .          .         .       .          .   .  .   .  
+          .    .    .          .         .    .          .         .       .          .   .  .   .  static double dist_sq( double *a1, double *a2, int dims ) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .    double dist_sq = 0, diff;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    while( --dims >= 0 ) {
+          .    .    .          .         .    .          .         .       .          .   .  .   .      diff = (a1[dims] - a2[dims]);
+          .    .    .          .         .    .          .         .       .          .   .  .   .      dist_sq += diff*diff;
+          .    .    .          .         .    .          .         .       .          .   .  .   .    }
+          .    .    .          .         .    .          .         .       .          .   .  .   .    return dist_sq;
+-- line 228 ----------------------------------------
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  /build/glibc-OTsEL5/glibc-2.27/malloc/malloc.c
+  /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+
+--------------------------------------------------------------------------------
+Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw Bc Bcm Bi Bim 
+--------------------------------------------------------------------------------
+64    9    9 71   95   96 49   53   16 57  95  0   0  percentage of events annotated
+
