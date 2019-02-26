@@ -180,34 +180,25 @@ int main(int argc, char **argv) {
   /* create a k-d tree for 3-dimensional points */
   ptree = kd_create( 3 );
 
-  pthread_t threads[4];
-  int j;
+  threadpool thpool = thpool_init(4);
   /* add some random nodes to the tree (assert nodes are successfully inserted) */
-  for( i=0; i<num_pts; i+=4 ) {
-    for( j=0; j<4; j++) {
-      /*    data[i] = 'a' + i; */
-      data[i+j] = i+j;
+  for( i=0; i<num_pts; i++ ) {
+    /*    data[i] = 'a' + i; */
+    data[i] = i;
 
-      struct insert_params *params;
-      if(!(params = malloc(sizeof(struct insert_params)))) {
-        perror("malloc failed");
-        free( data );
-        return 1;
-      }
-      params->ptree = ptree;
-      params->data = &data[i];
-
-      if(pthread_create(&threads[j], NULL, insert_proc, params)) {
-        perror("Error creating thread");
-        free(data);
-        return 1;
-      }
+    struct insert_params *params;
+    if(!(params = malloc(sizeof(struct insert_params)))) {
+      perror("malloc failed");
+      free( data );
+      return 1;
     }
-    pthread_join(threads[0], NULL);
-    pthread_join(threads[1], NULL);
-    pthread_join(threads[2], NULL);
-    pthread_join(threads[3], NULL);
+    params->ptree = ptree;
+    params->data = &data[i];
+
+    thpool_add_work(thpool, insert_proc, params);
   }
+
+  thpool_wait(thpool);
 
 #ifdef PRINTRESULTS
   /* find points closest to the origin and within distance radius */

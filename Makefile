@@ -1,11 +1,11 @@
 CC = gcc
-CFLAGS = -pthread -std=c89 -Wall -g -O3 -DUSEMALLOCNOTALLOCA -DUSEOWNSQRT 
+CFLAGS = -pthread -std=c99 -Wall -g -O3 -DUSEMALLOCNOTALLOCA -DUSEOWNSQRT
 
 .PHONY: all
 all: kdtreetest
 
-kdtreetest: kdtreetest.c kdtree.c kdtree.h
-	${CC} ${CFLAGS} -o kdtreetest kdtreetest.c kdtree.c
+kdtreetest: kdtreetest.c kdtree.c thpool.c kdtree.h
+	${CC} ${CFLAGS} -o kdtreetest kdtreetest.c kdtree.c thpool.c
 
 .PHONY: clean
 clean:
