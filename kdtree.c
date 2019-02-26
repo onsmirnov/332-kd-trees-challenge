@@ -191,7 +191,7 @@ static int insert_rec(struct kdnode **nptr, const double *pos, void *data, int d
 
 	node = *nptr;
 	__builtin_prefetch(node->pos, 0 , 2);
-	new_dir = (node->dir + 1) % dim;
+		new_dir = (node->dir + 1) % dim;
 	if(pos[node->dir] < node->pos[node->dir]) {
 		return insert_rec(&(*nptr)->left, pos, data, new_dir, dim);
 	}
