@@ -8,7 +8,7 @@ p = re.compile("[0-9]:(([0-9]*[.])?[0-9]+)elapsed")
 
 times = []
 for i in range(RUNS):
-  process = subprocess.Popen("time ./kdtreetest 5000000", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  process = subprocess.Popen("time ./kdtreetest 10000000", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   out, err = process.communicate()
   parsed = p.search(err.decode())
   t = float(parsed.group(1))
